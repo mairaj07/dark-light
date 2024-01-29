@@ -1,15 +1,17 @@
-const toggle = document.getElementById('toggleDark');
-const body = document.querySelector('body');
-
-toggle.addEventListener('click', function(){
-    this.classList.toggle('bi-moon');
-    if(this.classList.toggle('bi-brightness-high-fill')){
-        body.style.background='white';
-        body.style.color='black';
-        body.style.transition='2s';
-    }else{
-        body.style.background='black';
-        body.style.color='white';
-        body.style.transition='2s';
+$(document).ready(function(){
+    // Check if user has already set a preference
+    if(localStorage.getItem('theme') === 'dark') {
+      $('body').addClass('dark-mode');
+      $('#modeToggle').prop('checked', true);
     }
-})
+
+    $('#modeToggle').on('change', function(){
+      if($(this).is(':checked')) {
+        $('body').addClass('dark-mode');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        $('body').removeClass('dark-mode');
+        localStorage.setItem('theme', 'light');
+      }
+    });
+  });
